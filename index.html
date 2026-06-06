@@ -637,6 +637,7 @@
       .title .sub{font-size:18px}
       .title .meta{font-size:14px}
       .meeting-badge{width:100%;min-height:auto;padding:12px}
+      .grid{gap:14px}
 
       .panel,
       .issues-actions .panel{
@@ -664,16 +665,71 @@
         overflow:visible;
       }
 
+      .metric-stack{
+        grid-template-rows:auto auto;
+        gap:14px;
+      }
+
       .population-card,
       .local-grid,
       .network-grid{
         grid-template-columns:1fr 1fr;
       }
 
+      .local-grid{
+        gap:12px;
+      }
+
+      .mini-stat{
+        min-height:132px;
+        padding:14px 8px;
+      }
+
+      .mini-stat .num{
+        margin-top:8px;
+        font-size:36px;
+      }
+
+      .mini-stat .icon{
+        width:42px;
+        height:42px;
+        font-size:25px;
+      }
+
       .big-stat{grid-row:auto}
-      .age-chart{border-left:0;padding-left:0;border-top:2px solid #dce6f1;padding-top:12px}
-      .bar-row{grid-template-columns:1fr;gap:5px}
-      .bar-val{text-align:left}
+      .age-chart{
+        border-left:0;
+        padding-left:0;
+        border-top:1px solid rgba(31,79,154,.14);
+        padding-top:18px;
+        margin-top:4px;
+      }
+      .age-chart h3{
+        font-size:22px;
+        line-height:1.25;
+        margin-bottom:16px;
+      }
+      .bar-row{
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:8px 12px;
+        margin:16px 0;
+        font-size:17px;
+        align-items:end;
+      }
+      .bar-row > :first-child{
+        min-width:0;
+      }
+      .bar-track{
+        grid-column:1 / -1;
+        grid-row:2;
+        height:30px;
+      }
+      .bar-val{
+        grid-column:2;
+        grid-row:1;
+        text-align:right;
+        font-size:18px;
+      }
 
       .service-item{
         display:grid;
