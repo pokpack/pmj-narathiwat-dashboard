@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard กลุ่มเปราะบาง จังหวัดนราธิวาส</title>
+  <style>
+    :root{
+      --navy:#0b2f63;
+      --navy2:#123f82;
+      --blue:#1e66c7;
+      --teal:#0d8f8a;
+      --green:#3f8b3d;
+      --purple:#6846b8;
+      --orange:#ed8a00;
+      --ink:#10233e;
+      --muted:#637085;
+      --line:#cdd9e8;
+      --panel:#ffffff;
+      --bg:#eef4fb;
+      --danger:#e74c3c;
+      --ok:#11a66a;
+      --warning:#f39c12;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      font-family:"Noto Sans Thai","Tahoma",sans-serif;
+      background:#0b2f63;
+      color:var(--ink);
+    }
+
+    .viewport{
+      width:100vw;
+      height:100vh;
+      display:grid;
+      place-items:center;
+      background:#0b2f63;
+    }
+
+    .dashboard{
+      width:1920px;
+      height:1080px;
+      background:linear-gradient(180deg,#f9fbfe 0%,#eef4fb 100%);
+      transform-origin:center center;
+      display:grid;
+      grid-template-rows:120px 1fr 90px;
+      padding:18px 22px 0;
+      gap:12px;
+      box-shadow:0 0 50px rgba(0,0,0,.25);
+    }
+
+    .topbar{
+      display:grid;
+      grid-template-columns:110px 1fr 355px;
+      gap:16px;
+      align-items:center;
+    }
+
+    .seal{
+      width:90px;height:90px;border-radius:50%;
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 30% 30%,#1c4d91,#082b5a 70%);
+      border:5px solid #d8b64c;
+      color:#ffd86d;font-size:18px;font-weight:800;text-align:center;
+      line-height:1.05;
+      box-shadow:0 4px 10px rgba(0,0,0,.15);
+    }
+
+    .title h1{
+      margin:0;
+      font-size:44px;
+      line-height:1.05;
+      color:var(--navy);
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+
+    .title .sub{
+      margin-top:8px;
+      font-size:24px;
+      color:#3b4350;
+      font-weight:700;
+    }
+
+    .title .meta{
+      margin-top:8px;
+      font-size:16px;
+      color:#516175;
+      border-top:3px solid var(--blue);
+      padding-top:7px;
+    }
+
+    .meeting-badge{
+      height:82px;
+      border:3px solid var(--navy);
+      border-radius:18px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      font-size:22px;
+      font-weight:900;
+      color:var(--navy);
+      text-align:center;
+      box-shadow:0 4px 12px rgba(15,55,98,.10);
+    }
+
+    .meeting-badge .icon{font-size:40px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.18fr .82fr .76fr;
+      grid-template-rows:410px 1fr;
+      gap:14px;
+      min-height:0;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:2px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 5px 14px rgba(20,45,80,.06);
+      min-height:0;
+    }
+
+    .panel-h{
+      height:58px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 18px;
+      color:#fff;
+      font-weight:900;
+      font-size:27px;
+    }
+
+    .panel-h .letter{
+      width:42px;height:42px;border:3px solid currentColor;border-radius:50%;
+      display:grid;place-items:center;font-size:25px;
+    }
+
+    .panel-body{padding:14px;height:calc(100% - 58px)}
+
+    .navy .panel-h{background:linear-gradient(90deg,#0a2d61,#0c407d)}
+    .teal .panel-h{background:linear-gradient(90deg,#08766f,#0d9b93)}
+    .green .panel-h{background:linear-gradient(90deg,#397b36,#57a34f)}
+    .purple .panel-h{background:linear-gradient(90deg,#5e3ca7,#7657c7)}
+    .orange .panel-h{background:linear-gradient(90deg,#df7e00,#f2a018)}
+
+    .overview{grid-column:1;grid-row:1}
+    .vulnerable{grid-column:2 / 4;grid-row:1}
+    .services{grid-column:1;grid-row:2}
+    .network{grid-column:2;grid-row:2}
+    .issues-actions{grid-column:3;grid-row:2;display:grid;grid-template-rows:1fr 1fr;gap:14px}
+
+    .overview-layout{
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:16px;
+      height:100%;
+    }
+
+    .metric-stack{
+      display:grid;
+      grid-template-rows:1fr 96px;
+      gap:10px;
+    }
+
+    .population-card{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .big-stat,.sex-stat,.mini-stat{
+      border:2px solid #c9dbef;
+      border-radius:14px;
+      background:#f8fbff;
+    }
+
+    .big-stat{
+      grid-row:1 / span 2;
+      padding:20px 14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .big-stat .num{font-size:42px;font-weight:900;color:var(--navy)}
+    .big-stat .label{font-size:20px;font-weight:800}
+    .big-stat .icon{font-size:44px;margin-bottom:8px}
+
+    .sex-stat{
+      padding:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:18px;
+    }
+
+    .sex-stat .icon{font-size:38px}
+    .sex-stat .num{font-size:24px;font-weight:900}
+    .male .num{color:#0f67c8}
+    .female .num{color:#e84777}
+
+    .local-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .mini-stat{
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      font-size:17px;font-weight:800;text-align:center;
+    }
+    .mini-stat .num{font-size:28px;color:var(--navy)}
+    .mini-stat .icon{font-size:27px}
+
+    .age-chart{
+      border-left:2px solid #dce6f1;
+      padding-left:14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .age-chart h3,.small-title{margin:0 0 12px;font-size:19px;color:var(--navy);font-weight:900}
+    .bar-row{
+      display:grid;
+      grid-template-columns:155px 1fr 90px;
+      gap:8px;align-items:center;margin:10px 0;font-size:16px;font-weight:700;
+    }
+    .bar-track{height:28px;background:#e8eef5;border-radius:6px;overflow:hidden}
+    .bar{height:100%;border-radius:6px}
+    .b1{width:60%;background:#0f4c9a}
+    .b2{width:28%;background:#0b8a86}
+    .b3{width:100%;background:#68a93f}
+    .b4{width:30%;background:#7143ae}
+    .bar-val{text-align:right;font-weight:900}
+
+    .vuln-layout{
+      display:grid;
+      grid-template-columns:1fr 1fr 1.05fr;
+      gap:10px;
+      height:100%;
+    }
+
+    .subpanel{
+      border:2px solid #d7e2ef;
+      border-radius:14px;
+      padding:12px;
+      min-height:0;
+      background:#fbfdff;
+    }
+
+    .subhead{
+      display:flex;align-items:center;gap:10px;
+      font-size:22px;font-weight:900;color:var(--navy);
+      border-bottom:2px solid #e3ebf4;padding-bottom:8px;margin-bottom:8px;
+    }
+    .tag{
+      width:42px;height:34px;background:var(--navy);color:#fff;border-radius:9px;
+      display:grid;place-items:center;font-size:17px;
+    }
+
+    .kv{display:grid;grid-template-columns:1fr auto;gap:6px 10px;font-size:15px}
+    .kv .k{font-weight:700}
+    .kv .v{font-weight:900}
+    .red{color:#e83f32}.green-t{color:#079b62}.blue-t{color:#145fba}.purple-t{color:#7041b8}
+    .bullet-list{margin:8px 0 0;padding-left:18px;font-size:15px;line-height:1.5}
+    .highlight-chip{
+      margin-top:8px;padding:8px;border-radius:10px;background:#eef8f0;
+      border:1px solid #b9ddc0;font-size:14px;font-weight:800;
+    }
+
+    .elder-layout,.dis-layout{
+      display:grid;grid-template-columns:1fr 1fr;gap:8px;
+    }
+    .mini-bars .row{margin:9px 0}
+    .mini-bars .lab{font-size:13px;font-weight:800;margin-bottom:3px}
+    .mini-bars .track{height:22px;background:#edf1f6;border-radius:5px;overflow:hidden}
+    .mini-bars .fill{height:100%;border-radius:5px}
+    .f64{width:100%;background:#0b4e9b}.f34{width:54%;background:#13948f}.f16{width:25%;background:#744ab6}
+    .dis-bars .item{margin:8px 0;font-size:13px;font-weight:800}
+    .dis-bars .track{height:16px;background:#edf1f6;border-radius:5px;overflow:hidden;margin-top:3px}
+    .dis-bars .fill{height:100%}
+    .d1{width:100%;background:#0f4e9b}.d2{width:24%;background:#198d8c}.d3{width:18%;background:#6ca742}.d4{width:15%;background:#744ab6}
+
+    .services-layout{
+      display:grid;grid-template-columns:1.25fr .75fr;gap:12px;height:100%;
+    }
+    .service-list{display:flex;flex-direction:column;gap:9px}
+    .service-item{
+      border:2px solid #d5e7e6;background:#f8ffff;border-radius:12px;
+      padding:10px 12px;font-size:16px;font-weight:700;
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .service-item strong{font-size:22px;color:#087d78}
+    .service-item .danger{color:#e84b3c}
+    .top3{
+      border:2px dashed #42a6a1;border-radius:14px;padding:12px;
+      background:#f8ffff;
+    }
+    .rank{
+      display:flex;align-items:center;gap:10px;margin:14px 0;font-weight:900;font-size:17px;
+    }
+    .rank .n{
+      width:34px;height:34px;border-radius:50%;background:#0d8f8a;color:#fff;
+      display:grid;place-items:center;
+    }
+
+    .network-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:9px;height:calc(100% - 38px);
+    }
+    .net-card{
+      border:2px solid #cfe1cb;border-radius:14px;background:#f9fff7;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:8px;font-weight:800;font-size:15px;
+    }
+    .net-card .icon{font-size:34px;margin-bottom:4px}
+    .net-card strong{font-size:23px;color:#397b36}
+    .net-foot{
+      grid-column:1/-1;border-top:3px solid #5ba152;padding-top:7px;
+      font-size:14px;text-align:center;font-weight:800;color:#345f33;
+    }
+
+    .issues-actions .panel{height:100%}
+    .issue-list{display:flex;flex-direction:column;gap:10px}
+    .issue{
+      display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start;
+      border-bottom:1px dashed #ccbfe4;padding-bottom:8px;
+      font-size:14.5px;line-height:1.42;font-weight:700;
+    }
+    .issue .icon{font-size:28px;color:var(--purple)}
+
+    .action-list{display:flex;flex-direction:column;gap:9px}
+    .action{
+      display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:start;
+      background:#fffaf1;border:2px solid #f2c477;border-radius:12px;
+      padding:9px;font-size:14px;line-height:1.35;font-weight:800;
+    }
+    .action .n{
+      width:32px;height:32px;border-radius:50%;background:var(--orange);color:#fff;
+      display:grid;place-items:center;font-weight:900;
+    }
+
+    .footer{
+      margin:0 -22px;
+      background:linear-gradient(90deg,#082e63,#0c477f);
+      color:#fff;
+      display:flex;align-items:center;
+      padding:0 36px;
+      gap:18px;
+      font-size:24px;
+      font-weight:800;
+    }
+    .footer .icon{font-size:42px}
+    .footer strong{color:#ffd04c;font-size:31px}
+
+    @media (max-width: 1000px){
+      body{overflow:auto}
+    }
+  </style>
+</head>
+<body>
+<div class="viewport">
+  <main class="dashboard" id="dashboard">
+    <header class="topbar">
+      <div class="seal">จังหวัด<br>นราธิวาส</div>
+      <div class="title">
+        <h1>หน่วยงาน: พัฒนาสังคมและความมั่นคงของมนุษย์จังหวัดนราธิวาส (พมจ.)</h1>
+        <div class="sub">Dashboard ภาพรวมกลุ่มเปราะบาง ประเด็นปัญหา และข้อเสนอเชิงบูรณาการระดับจังหวัด</div>
+        <div class="meta">● ข้อมูล ณ 22 พ.ค. 2569 &nbsp;|&nbsp; แหล่งข้อมูล: สำนักงาน พมจ.นราธิวาส และเอกสารประกอบการประชุม</div>
+      </div>
+      <div class="meeting-badge"><div class="icon">👥</div><div>ใช้ประกอบการประชุมร่วม<br>ผู้ว่าราชการจังหวัด</div></div>
+    </header>
+
+    <section class="grid">
+      <section class="panel navy overview">
+        <div class="panel-h"><span class="letter">A</span>ภาพรวมจังหวัด</div>
+        <div class="panel-body overview-layout">
+          <div class="metric-stack">
+            <div class="population-card">
+              <div class="big-stat">
+                <div class="icon">👥</div>
+                <div class="label">ประชากรทั้งหมด</div>
+                <div class="num">827,209</div>
+                <div>คน</div>
+              </div>
+              <div class="sex-stat male"><div class="icon">♂</div><div>ชาย<div class="num">409,134 คน</div><b>(49.46%)</b></div></div>
+              <div class="sex-stat female"><div class="icon">♀</div><div>หญิง<div class="num">418,075 คน</div><b>(50.54%)</b></div></div>
+            </div>
+            <div class="local-grid">
+              <div class="mini-stat"><div class="icon">🏛️</div><div class="num">13</div><div>อำเภอ</div></div>
+              <div class="mini-stat"><div class="icon">📍</div><div class="num">77</div><div>ตำบล</div></div>
+              <div class="mini-stat"><div class="icon">🏘️</div><div class="num">592</div><div>หมู่บ้าน</div></div>
+              <div class="mini-stat"><div class="icon">🏢</div><div class="num">89</div><div>อปท.</div></div>
+            </div>
+          </div>
+          <div class="age-chart">
+            <h3>โครงสร้างประชากรตามช่วงวัย</h3>
+            <div class="bar-row"><div>เด็ก 0–17 ปี</div><div class="bar-track"><div class="bar b1"></div></div><div class="bar-val">227,914</div></div>
+            <div class="bar-row"><div>เยาวชน 18–25 ปี</div><div class="bar-track"><div class="bar b2"></div></div><div class="bar-val">105,700</div></div>
+            <div class="bar-row"><div>วัยแรงงาน 26–59 ปี</div><div class="bar-track"><div class="bar b3"></div></div><div class="bar-val">378,796</div></div>
+            <div class="bar-row"><div>ผู้สูงอายุ 60 ปีขึ้นไป</div><div class="bar-track"><div class="bar b4"></div></div><div class="bar-val">114,799</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel navy vulnerable">
+        <div class="panel-h"><span class="letter">B</span>กลุ่มเปราะบางสำคัญ</div>
+        <div class="panel-body vuln-layout">
+          <div class="subpanel">
+            <div class="subhead"><span class="tag">B1</span>👧 เด็กและเยาวชน</div>
+            <div class="kv">
+              <div class="k">ประชากรเด็กและเยาวชน</div><div class="v blue-t">333,614 คน</div>
+              <div class="k">ผู้มีสิทธิรับเงินอุดหนุนเด็กแรกเกิด</div><div class="v">65,627 ราย</div>
+              <div class="k">ได้รับเงินอุดหนุนแล้ว</div><div class="v green-t">59,034 ราย</div>
+              <div class="k">ความครอบคลุม</div><div class="v green-t">89.95%</div>
+              <div class="k">เด็กนอกระบบการศึกษา</div><div class="v red">10,730 คน</div>
+              <div class="k">สภาเด็กและเยาวชน</div><div class="v">102 แห่ง</div>
+            </div>
+            <div class="highlight-chip">✓ เงินอุดหนุนเด็กแรกเกิดครอบคลุม 89.95%</div>
+          </div>
+
+          <div class="subpanel">
+            <div class="subhead"><span class="tag">B2</span>👵 ผู้สูงอายุ</div>
+            <div class="elder-layout">
+              <div>
+                <div class="kv">
+                  <div class="k">ผู้สูงอายุทั้งหมด</div><div class="v red">114,799 คน</div>
+                  <div class="k">ได้รับเบี้ยยังชีพ</div><div class="v green-t">93,389 คน</div>
+                </div>
+                <ul class="bullet-list">
+                  <li>ติดสังคม <b class="blue-t">37,997</b> คน</li>
+                  <li>ติดบ้าน <b>731</b> คน</li>
+                  <li>ติดเตียง <b>226</b> คน</li>
+                  <li>ศพอส. <b class="red">58</b> แห่ง</li>
+                  <li>โรงเรียนผู้สูงอายุ <b class="red">7</b> แห่ง</li>
+                </ul>
+              </div>
+              <div class="mini-bars">
+                <div class="small-title">ช่วงอายุผู้สูงอายุ</div>
+                <div class="row"><div class="lab">60–69 ปี 64,645</div><div class="track"><div class="fill f64"></div></div></div>
+                <div class="row"><div class="lab">70–79 ปี 34,084</div><div class="track"><div class="fill f34"></div></div></div>
+                <div class="row"><div class="lab">80 ปีขึ้นไป 16,070</div><div class="track"><div class="fill f16"></div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subpanel">
+            <div class="subhead"><span class="tag">B3</span>♿ คนพิการ</div>
+            <div class="dis-layout">
+              <div>
+                <div class="kv">
+                  <div class="k">จดทะเบียนแล้ว</div><div class="v red">28,106 คน</div>
+                  <div class="k">คิดเป็น</div><div class="v red">3.4%</div>
+                  <div class="k">วัยเด็ก</div><div class="v blue-t">1,909 คน</div>
+                  <div class="k">วัยแรงงาน</div><div class="v green-t">13,352 คน</div>
+                  <div class="k">วัยผู้สูงอายุ</div><div class="v purple-t">12,845 คน</div>
+                </div>
+              </div>
+              <div class="dis-bars">
+                <div class="small-title">ประเภทความพิการเด่น</div>
+                <div class="item">การเคลื่อนไหว 15,486<div class="track"><div class="fill d1"></div></div></div>
+                <div class="item">ได้ยิน/สื่อความหมาย 3,685<div class="track"><div class="fill d2"></div></div></div>
+                <div class="item">จิตใจและพฤติกรรม 2,738<div class="track"><div class="fill d3"></div></div></div>
+                <div class="item">สติปัญญา 2,306<div class="track"><div class="fill d4"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel teal services">
+        <div class="panel-h"><span class="letter">C</span>การช่วยเหลือและสถานะบริการ</div>
+        <div class="panel-body services-layout">
+          <div class="service-list">
+            <div class="service-item"><span>🏠 ครัวเรือนเปราะบางใน MSO-Logbook</span><strong>30,413 ครัวเรือน</strong></div>
+            <div class="service-item"><span>🔎 สำรวจและจำแนกเชิงลึก</span><strong>12,077 ครัวเรือน</strong></div>
+            <div class="service-item"><span>🤲 ช่วยเหลือแล้ว</span><strong class="danger">731 จาก 1,017 (71.87%)</strong></div>
+            <div class="service-item"><span>☎️ สายด่วน พม. 1300 รับแจ้ง</span><strong>1,179 ราย</strong></div>
+            <div class="service-item"><span>✅ ช่วยเหลือแล้ว / ⏱ ระหว่างดำเนินการ</span><strong>600 / 579 ราย</strong></div>
+          </div>
+          <div class="top3">
+            <div class="small-title">3 ประเด็นบริการสูงสุด</div>
+            <div class="rank"><span class="n">1</span>ความยากจน</div>
+            <div class="rank"><span class="n">2</span>ปรับสภาพที่อยู่อาศัย</div>
+            <div class="rank"><span class="n">3</span>เงินอุดหนุนเด็กแรกเกิด</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel green network">
+        <div class="panel-h"><span class="letter">D</span>เครือข่ายและกลไกในพื้นที่</div>
+        <div class="panel-body">
+          <div class="network-grid">
+            <div class="net-card"><div class="icon">👥</div>อพม.<strong>3,057 คน</strong></div>
+            <div class="net-card"><div class="icon">🏡</div>ศูนย์ผู้สูงอายุ (ศพอส.)<strong>58 แห่ง</strong></div>
+            <div class="net-card"><div class="icon">👪</div>ศูนย์พัฒนาครอบครัวในชุมชน<strong>79 แห่ง</strong></div>
+            <div class="net-card"><div class="icon">♿</div>ศูนย์บริการคนพิการทั่วไป<strong>58 แห่ง</strong></div>
+            <div class="net-card"><div class="icon">👨‍👩‍👧‍👦</div>สภาองค์กรชุมชน<strong>88 แห่ง</strong></div>
+            <div class="net-card"><div class="icon">🤝</div>องค์กรตาม พ.ร.บ. สวัสดิการ<strong>64 แห่ง</strong></div>
+            <div class="net-foot">พมจ. เชื่อมการทำงานกับ รพ. | อปท. | อพม. | ชุมชน | สำนักงานจังหวัด</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="issues-actions">
+        <section class="panel purple">
+          <div class="panel-h"><span class="letter">E</span>ประเด็นปัญหาเชิงพื้นที่</div>
+          <div class="panel-body">
+            <div class="issue-list">
+              <div class="issue"><div class="icon">⚠</div><div>ตัวเลขบางพื้นที่ต้องอธิบายด้วยสัดส่วน/อัตรา ไม่ใช้จำนวนดิบอย่างเดียว</div></div>
+              <div class="issue"><div class="icon">⚠</div><div>ข้อมูลหลายระบบยังไม่เชื่อมกัน ทำให้ติดตามกลุ่มเปราะบางได้ไม่ครบวงจร</div></div>
+              <div class="issue"><div class="icon">⚠</div><div>ปัญหาความยากจน หนี้สิน ยาเสพติด และภัยพิบัติ กระทบกลุ่มเปราะบางซ้ำซ้อน</div></div>
+              <div class="issue"><div class="icon">⚠</div><div>สถานรองรับและทรัพยากรในพื้นที่ยังไม่เพียงพอ เมื่อเทียบกับภาระงานและบริบทพื้นที่</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel orange">
+          <div class="panel-h"><span class="letter">F</span>ข้อเสนอจากที่ประชุม</div>
+          <div class="panel-body">
+            <div class="action-list">
+              <div class="action"><div class="n">1</div><div>จัดทำฐานข้อมูลกลางกลุ่มเปราะบาง เชื่อมข้อมูล พมจ. รพ. อปท. และสำนักงานจังหวัด</div></div>
+              <div class="action"><div class="n">2</div><div>ใช้อัตราและสัดส่วน วิเคราะห์รายอำเภอ/ตำบล เพื่อสะท้อนภาพจริงของพื้นที่</div></div>
+              <div class="action"><div class="n">3</div><div>จัดทำเส้นทางการส่งต่อความช่วยเหลือให้ชัดเจน ใครคัดกรอง ใครอนุมัติ ใครติดตาม</div></div>
+              <div class="action"><div class="n">4</div><div>พัฒนา Dashboard ระดับจังหวัด เพื่อติดตามเด็ก ผู้สูงอายุ คนพิการ และครัวเรือนเปราะบางแบบเรียลไทม์</div></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="icon">🎯</div>
+      <div><strong>ข้อสรุป:</strong> พมจ. เป็นกลไกหลักด้านการคุ้มครองทางสังคมของจังหวัด โดยโจทย์สำคัญคือ การเชื่อมข้อมูล ใช้อัตราอธิบายพื้นที่ และกำหนดระบบส่งต่อที่ติดตามผลได้จริง</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  function fitDashboard(){
+    const d = document.getElementById('dashboard');
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    d.style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', fitDashboard);
+  fitDashboard();
+</script>
+</body>
+</html>
