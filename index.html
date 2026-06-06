@@ -200,6 +200,68 @@
 
     .panel-body{padding:12px;min-height:0;overflow:hidden}
 
+    .sf{
+      --icon:#007aff;
+      position:relative;
+      width:1em;
+      height:1em;
+      display:inline-grid;
+      place-items:center;
+      color:var(--icon);
+      line-height:1;
+      font-size:1em;
+      flex:0 0 auto;
+    }
+    .sf::before,
+    .sf::after{
+      content:"";
+      position:absolute;
+      box-sizing:border-box;
+    }
+    .sf-users::before{
+      width:.38em;height:.38em;border:.08em solid currentColor;border-radius:50%;
+      top:.15em;left:.31em;
+      box-shadow:-.25em .07em 0 -.04em currentColor,.25em .07em 0 -.04em currentColor;
+    }
+    .sf-users::after{
+      width:.82em;height:.42em;border:.08em solid currentColor;border-radius:.42em .42em .18em .18em;
+      bottom:.12em;left:.09em;
+    }
+    .sf-person::before{width:.36em;height:.36em;border:.08em solid currentColor;border-radius:50%;top:.13em;left:.32em}
+    .sf-person::after{width:.68em;height:.38em;border:.08em solid currentColor;border-radius:.36em .36em .16em .16em;bottom:.13em;left:.16em}
+    .sf-child::before{width:.34em;height:.34em;border:.08em solid currentColor;border-radius:50%;top:.1em;left:.33em}
+    .sf-child::after{width:.52em;height:.48em;border:.08em solid currentColor;border-radius:.18em;bottom:.12em;left:.24em}
+    .sf-senior::before{width:.36em;height:.36em;border:.08em solid currentColor;border-radius:50%;top:.1em;left:.22em}
+    .sf-senior::after{width:.54em;height:.42em;border-left:.08em solid currentColor;border-bottom:.08em solid currentColor;border-radius:0 0 0 .18em;bottom:.13em;left:.38em;box-shadow:.28em -.04em 0 -.02em currentColor}
+    .sf-access::before{width:.28em;height:.28em;border:.08em solid currentColor;border-radius:50%;top:.08em;left:.36em}
+    .sf-access::after{width:.7em;height:.48em;border:.08em solid currentColor;border-top:0;border-right:.08em solid currentColor;border-radius:0 0 .4em .4em;bottom:.12em;left:.15em;transform:skewX(-8deg)}
+    .sf-building::before{width:.68em;height:.6em;border:.08em solid currentColor;border-radius:.08em;bottom:.12em;left:.16em}
+    .sf-building::after{width:.11em;height:.11em;background:currentColor;top:.32em;left:.3em;box-shadow:.2em 0 currentColor,.4em 0 currentColor,0 .18em currentColor,.2em .18em currentColor,.4em .18em currentColor}
+    .sf-landmark::before{width:.74em;height:.1em;background:currentColor;top:.3em;left:.13em;box-shadow:0 .46em currentColor}
+    .sf-landmark::after{width:.1em;height:.42em;background:currentColor;top:.39em;left:.22em;box-shadow:.16em 0 currentColor,.32em 0 currentColor,.48em 0 currentColor}
+    .sf-pin::before{width:.52em;height:.52em;border:.08em solid currentColor;border-radius:50% 50% 50% 0;transform:rotate(-45deg);top:.12em;left:.24em}
+    .sf-pin::after{width:.14em;height:.14em;background:currentColor;border-radius:50%;top:.29em;left:.43em}
+    .sf-home::before{width:.62em;height:.48em;border:.08em solid currentColor;border-top:0;border-radius:.06em;bottom:.12em;left:.19em}
+    .sf-home::after{width:.56em;height:.56em;border-left:.08em solid currentColor;border-top:.08em solid currentColor;transform:rotate(45deg);top:.11em;left:.22em}
+    .sf-search::before{width:.52em;height:.52em;border:.08em solid currentColor;border-radius:50%;top:.12em;left:.13em}
+    .sf-search::after{width:.34em;height:.08em;background:currentColor;border-radius:.08em;transform:rotate(45deg);right:.12em;bottom:.18em}
+    .sf-hand::before{width:.58em;height:.36em;border:.08em solid currentColor;border-radius:.22em;bottom:.16em;left:.19em}
+    .sf-hand::after{width:.08em;height:.5em;background:currentColor;border-radius:.08em;top:.14em;left:.34em;box-shadow:.14em -.04em currentColor,.28em .02em currentColor}
+    .sf-phone::before{width:.48em;height:.76em;border:.08em solid currentColor;border-radius:.14em;top:.1em;left:.26em}
+    .sf-phone::after{width:.12em;height:.03em;background:currentColor;border-radius:.03em;bottom:.18em;left:.44em}
+    .sf-check::before{width:.72em;height:.72em;border:.08em solid currentColor;border-radius:50%;top:.14em;left:.14em}
+    .sf-check::after{width:.42em;height:.22em;border-left:.09em solid currentColor;border-bottom:.09em solid currentColor;transform:rotate(-45deg);top:.35em;left:.31em}
+    .sf-clock::before{width:.7em;height:.7em;border:.08em solid currentColor;border-radius:50%;top:.15em;left:.15em}
+    .sf-clock::after{width:.25em;height:.28em;border-left:.08em solid currentColor;border-bottom:.08em solid currentColor;top:.3em;left:.49em}
+    .sf-warning::before{width:.78em;height:.68em;border:.08em solid currentColor;border-radius:.08em;clip-path:polygon(50% 0,100% 100%,0 100%);top:.16em;left:.11em}
+    .sf-warning::after{width:.08em;height:.25em;background:currentColor;border-radius:.08em;top:.39em;left:.46em;box-shadow:0 .31em 0 0 currentColor}
+    .sf-target::before{width:.78em;height:.78em;border:.08em solid currentColor;border-radius:50%;top:.11em;left:.11em;box-shadow:inset 0 0 0 .13em rgba(0,122,255,.16)}
+    .sf-target::after{width:.18em;height:.18em;background:currentColor;border-radius:50%;top:.41em;left:.41em}
+    .sf-family::before{width:.26em;height:.26em;border:.07em solid currentColor;border-radius:50%;top:.12em;left:.18em;box-shadow:.28em -.04em 0 -.04em currentColor,.56em .02em 0 -.05em currentColor}
+    .sf-family::after{width:.82em;height:.43em;border:.07em solid currentColor;border-radius:.32em .32em .16em .16em;bottom:.13em;left:.09em}
+    .sf-network::before{width:.22em;height:.22em;background:currentColor;border-radius:50%;top:.16em;left:.2em;box-shadow:.42em 0 currentColor,.21em .42em currentColor}
+    .sf-network::after{width:.5em;height:.5em;border-left:.06em solid currentColor;border-bottom:.06em solid currentColor;transform:rotate(-45deg);top:.28em;left:.25em}
+
     .panel-h{background:rgba(255,255,255,.52);border-bottom:1px solid var(--hairline)}
     .navy .panel-h .letter{background:linear-gradient(145deg,#007aff,#315ddc)}
     .teal .panel-h .letter{background:linear-gradient(145deg,#00c7be,#0095a8)}
@@ -335,6 +397,15 @@
       border-bottom:1px solid rgba(31,79,154,.14);padding-bottom:6px;margin-bottom:7px;
       line-height:1.18;
     }
+    .sub-icon{
+      width:34px;height:34px;border-radius:8px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.74);
+      color:#007aff;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 8px 18px rgba(0,122,255,.10);
+      font-size:22px;
+      flex:0 0 auto;
+    }
     .tag{
       width:36px;height:30px;background:linear-gradient(145deg,#007aff,#315ddc);color:#fff;border-radius:8px;
       display:grid;place-items:center;font-size:15px;flex:0 0 auto;
@@ -349,6 +420,7 @@
     .highlight-chip{
       margin-top:8px;padding:7px;border-radius:8px;background:rgba(232,255,239,.72);
       border:1px solid rgba(52,199,89,.28);font-size:13px;font-weight:800;line-height:1.25;
+      display:flex;align-items:center;gap:6px;
     }
 
     .elder-layout,.dis-layout{
@@ -374,6 +446,19 @@
       display:flex;justify-content:space-between;align-items:center;
       gap:12px;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 18px rgba(21,57,102,.07);
+    }
+    .service-item span:first-child{
+      display:flex;align-items:center;gap:7px;min-width:0;
+    }
+    .inline-icon{
+      width:24px;height:24px;border-radius:7px;
+      display:inline-grid;place-items:center;
+      background:rgba(255,255,255,.76);
+      color:#007aff;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+      font-size:15px;
+      flex:0 0 auto;
+      vertical-align:-.2em;
     }
     .service-item strong{font-size:19px;color:#087d78;text-align:right;line-height:1.15;white-space:normal}
     .service-item .danger{color:#e84b3c}
@@ -618,7 +703,7 @@
         <div class="sub">Dashboard ภาพรวมกลุ่มเปราะบาง ประเด็นปัญหา และข้อเสนอเชิงบูรณาการระดับจังหวัด</div>
         <div class="meta">● ข้อมูล ณ 22 พ.ค. 2569 &nbsp;|&nbsp; แหล่งข้อมูล: สำนักงาน พมจ.นราธิวาส และเอกสารประกอบการประชุม</div>
       </div>
-      <div class="meeting-badge"><div class="icon">👥</div><div>ใช้ประกอบการประชุมร่วม<br>ผู้ว่าราชการจังหวัด</div></div>
+      <div class="meeting-badge"><div class="icon"><span class="sf sf-users" aria-hidden="true"></span></div><div>ใช้ประกอบการประชุมร่วม<br>ผู้ว่าราชการจังหวัด</div></div>
     </header>
 
     <section class="grid">
@@ -628,19 +713,19 @@
           <div class="metric-stack">
             <div class="population-card">
               <div class="big-stat">
-                <div class="icon">👥</div>
+                <div class="icon"><span class="sf sf-users" aria-hidden="true"></span></div>
                 <div class="label">ประชากรทั้งหมด</div>
                 <div class="num">827,209</div>
                 <div>คน</div>
               </div>
-              <div class="sex-stat male"><div class="icon">♂</div><div>ชาย<div class="num">409,134 คน</div><b>(49.46%)</b></div></div>
-              <div class="sex-stat female"><div class="icon">♀</div><div>หญิง<div class="num">418,075 คน</div><b>(50.54%)</b></div></div>
+              <div class="sex-stat male"><div class="icon"><span class="sf sf-person" aria-hidden="true"></span></div><div>ชาย<div class="num">409,134 คน</div><b>(49.46%)</b></div></div>
+              <div class="sex-stat female"><div class="icon"><span class="sf sf-person" aria-hidden="true"></span></div><div>หญิง<div class="num">418,075 คน</div><b>(50.54%)</b></div></div>
             </div>
             <div class="local-grid">
-              <div class="mini-stat"><div class="icon">🏛️</div><div class="num">13</div><div>อำเภอ</div></div>
-              <div class="mini-stat"><div class="icon">📍</div><div class="num">77</div><div>ตำบล</div></div>
-              <div class="mini-stat"><div class="icon">🏘️</div><div class="num">592</div><div>หมู่บ้าน</div></div>
-              <div class="mini-stat"><div class="icon">🏢</div><div class="num">89</div><div>อปท.</div></div>
+              <div class="mini-stat"><div class="icon"><span class="sf sf-landmark" aria-hidden="true"></span></div><div class="num">13</div><div>อำเภอ</div></div>
+              <div class="mini-stat"><div class="icon"><span class="sf sf-pin" aria-hidden="true"></span></div><div class="num">77</div><div>ตำบล</div></div>
+              <div class="mini-stat"><div class="icon"><span class="sf sf-home" aria-hidden="true"></span></div><div class="num">592</div><div>หมู่บ้าน</div></div>
+              <div class="mini-stat"><div class="icon"><span class="sf sf-building" aria-hidden="true"></span></div><div class="num">89</div><div>อปท.</div></div>
             </div>
           </div>
           <div class="age-chart">
@@ -657,7 +742,7 @@
         <div class="panel-h"><span class="letter">B</span>กลุ่มเปราะบางสำคัญ</div>
         <div class="panel-body vuln-layout">
           <div class="subpanel">
-            <div class="subhead"><span class="tag">B1</span>👧 เด็กและเยาวชน</div>
+            <div class="subhead"><span class="tag">B1</span><span class="sub-icon"><span class="sf sf-child" aria-hidden="true"></span></span>เด็กและเยาวชน</div>
             <div class="kv">
               <div class="k">ประชากรเด็กและเยาวชน</div><div class="v blue-t">333,614 คน</div>
               <div class="k">ผู้มีสิทธิรับเงินอุดหนุนเด็กแรกเกิด</div><div class="v">65,627 ราย</div>
@@ -666,11 +751,11 @@
               <div class="k">เด็กนอกระบบการศึกษา</div><div class="v red">10,730 คน</div>
               <div class="k">สภาเด็กและเยาวชน</div><div class="v">102 แห่ง</div>
             </div>
-            <div class="highlight-chip">✓ เงินอุดหนุนเด็กแรกเกิดครอบคลุม 89.95%</div>
+            <div class="highlight-chip"><span class="inline-icon"><span class="sf sf-check" aria-hidden="true"></span></span> เงินอุดหนุนเด็กแรกเกิดครอบคลุม 89.95%</div>
           </div>
 
           <div class="subpanel">
-            <div class="subhead"><span class="tag">B2</span>👵 ผู้สูงอายุ</div>
+            <div class="subhead"><span class="tag">B2</span><span class="sub-icon"><span class="sf sf-senior" aria-hidden="true"></span></span>ผู้สูงอายุ</div>
             <div class="elder-layout">
               <div>
                 <div class="kv">
@@ -695,7 +780,7 @@
           </div>
 
           <div class="subpanel">
-            <div class="subhead"><span class="tag">B3</span>♿ คนพิการ</div>
+            <div class="subhead"><span class="tag">B3</span><span class="sub-icon"><span class="sf sf-access" aria-hidden="true"></span></span>คนพิการ</div>
             <div class="dis-layout">
               <div>
                 <div class="kv">
@@ -722,11 +807,11 @@
         <div class="panel-h"><span class="letter">C</span>การช่วยเหลือและสถานะบริการ</div>
         <div class="panel-body services-layout">
           <div class="service-list">
-            <div class="service-item"><span>🏠 ครัวเรือนเปราะบางใน MSO-Logbook</span><strong>30,413 ครัวเรือน</strong></div>
-            <div class="service-item"><span>🔎 สำรวจและจำแนกเชิงลึก</span><strong>12,077 ครัวเรือน</strong></div>
-            <div class="service-item"><span>🤲 ช่วยเหลือแล้ว</span><strong class="danger">731 จาก 1,017 (71.87%)</strong></div>
-            <div class="service-item"><span>☎️ สายด่วน พม. 1300 รับแจ้ง</span><strong>1,179 ราย</strong></div>
-            <div class="service-item"><span>✅ ช่วยเหลือแล้ว / ⏱ ระหว่างดำเนินการ</span><strong>600 / 579 ราย</strong></div>
+            <div class="service-item"><span><span class="inline-icon"><span class="sf sf-home" aria-hidden="true"></span></span>ครัวเรือนเปราะบางใน MSO-Logbook</span><strong>30,413 ครัวเรือน</strong></div>
+            <div class="service-item"><span><span class="inline-icon"><span class="sf sf-search" aria-hidden="true"></span></span>สำรวจและจำแนกเชิงลึก</span><strong>12,077 ครัวเรือน</strong></div>
+            <div class="service-item"><span><span class="inline-icon"><span class="sf sf-hand" aria-hidden="true"></span></span>ช่วยเหลือแล้ว</span><strong class="danger">731 จาก 1,017 (71.87%)</strong></div>
+            <div class="service-item"><span><span class="inline-icon"><span class="sf sf-phone" aria-hidden="true"></span></span>สายด่วน พม. 1300 รับแจ้ง</span><strong>1,179 ราย</strong></div>
+            <div class="service-item"><span><span class="inline-icon"><span class="sf sf-check" aria-hidden="true"></span></span>ช่วยเหลือแล้ว / <span class="inline-icon"><span class="sf sf-clock" aria-hidden="true"></span></span>ระหว่างดำเนินการ</span><strong>600 / 579 ราย</strong></div>
           </div>
           <div class="top3">
             <div class="small-title">3 ประเด็นบริการสูงสุด</div>
@@ -741,12 +826,12 @@
         <div class="panel-h"><span class="letter">D</span>เครือข่ายและกลไกในพื้นที่</div>
         <div class="panel-body">
           <div class="network-grid">
-            <div class="net-card"><div class="icon">👥</div>อพม.<strong>3,057 คน</strong></div>
-            <div class="net-card"><div class="icon">🏡</div>ศูนย์ผู้สูงอายุ (ศพอส.)<strong>58 แห่ง</strong></div>
-            <div class="net-card"><div class="icon">👪</div>ศูนย์พัฒนาครอบครัวในชุมชน<strong>79 แห่ง</strong></div>
-            <div class="net-card"><div class="icon">♿</div>ศูนย์บริการคนพิการทั่วไป<strong>58 แห่ง</strong></div>
-            <div class="net-card"><div class="icon">👨‍👩‍👧‍👦</div>สภาองค์กรชุมชน<strong>88 แห่ง</strong></div>
-            <div class="net-card"><div class="icon">🤝</div>องค์กรตาม พ.ร.บ. สวัสดิการ<strong>64 แห่ง</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-users" aria-hidden="true"></span></div>อพม.<strong>3,057 คน</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-home" aria-hidden="true"></span></div>ศูนย์ผู้สูงอายุ (ศพอส.)<strong>58 แห่ง</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-family" aria-hidden="true"></span></div>ศูนย์พัฒนาครอบครัวในชุมชน<strong>79 แห่ง</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-access" aria-hidden="true"></span></div>ศูนย์บริการคนพิการทั่วไป<strong>58 แห่ง</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-network" aria-hidden="true"></span></div>สภาองค์กรชุมชน<strong>88 แห่ง</strong></div>
+            <div class="net-card"><div class="icon"><span class="sf sf-hand" aria-hidden="true"></span></div>องค์กรตาม พ.ร.บ. สวัสดิการ<strong>64 แห่ง</strong></div>
             <div class="net-foot">พมจ. เชื่อมการทำงานกับ รพ. | อปท. | อพม. | ชุมชน | สำนักงานจังหวัด</div>
           </div>
         </div>
@@ -757,10 +842,10 @@
           <div class="panel-h"><span class="letter">E</span>ประเด็นปัญหาเชิงพื้นที่</div>
           <div class="panel-body">
             <div class="issue-list">
-              <div class="issue"><div class="icon">⚠</div><div>ตัวเลขบางพื้นที่ต้องอธิบายด้วยสัดส่วน/อัตรา ไม่ใช้จำนวนดิบอย่างเดียว</div></div>
-              <div class="issue"><div class="icon">⚠</div><div>ข้อมูลหลายระบบยังไม่เชื่อมกัน ทำให้ติดตามกลุ่มเปราะบางได้ไม่ครบวงจร</div></div>
-              <div class="issue"><div class="icon">⚠</div><div>ปัญหาความยากจน หนี้สิน ยาเสพติด และภัยพิบัติ กระทบกลุ่มเปราะบางซ้ำซ้อน</div></div>
-              <div class="issue"><div class="icon">⚠</div><div>สถานรองรับและทรัพยากรในพื้นที่ยังไม่เพียงพอ เมื่อเทียบกับภาระงานและบริบทพื้นที่</div></div>
+              <div class="issue"><div class="icon"><span class="sf sf-warning" aria-hidden="true"></span></div><div>ตัวเลขบางพื้นที่ต้องอธิบายด้วยสัดส่วน/อัตรา ไม่ใช้จำนวนดิบอย่างเดียว</div></div>
+              <div class="issue"><div class="icon"><span class="sf sf-warning" aria-hidden="true"></span></div><div>ข้อมูลหลายระบบยังไม่เชื่อมกัน ทำให้ติดตามกลุ่มเปราะบางได้ไม่ครบวงจร</div></div>
+              <div class="issue"><div class="icon"><span class="sf sf-warning" aria-hidden="true"></span></div><div>ปัญหาความยากจน หนี้สิน ยาเสพติด และภัยพิบัติ กระทบกลุ่มเปราะบางซ้ำซ้อน</div></div>
+              <div class="issue"><div class="icon"><span class="sf sf-warning" aria-hidden="true"></span></div><div>สถานรองรับและทรัพยากรในพื้นที่ยังไม่เพียงพอ เมื่อเทียบกับภาระงานและบริบทพื้นที่</div></div>
             </div>
           </div>
         </section>
@@ -780,7 +865,7 @@
     </section>
 
     <footer class="footer">
-      <div class="icon">🎯</div>
+      <div class="icon"><span class="sf sf-target" aria-hidden="true"></span></div>
       <div><strong>ข้อสรุป:</strong> พมจ. เป็นกลไกหลักด้านการคุ้มครองทางสังคมของจังหวัด โดยโจทย์สำคัญคือ การเชื่อมข้อมูล ใช้อัตราอธิบายพื้นที่ และกำหนดระบบส่งต่อที่ติดตามผลได้จริง</div>
     </footer>
   </main>
